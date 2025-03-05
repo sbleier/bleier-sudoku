@@ -54,14 +54,14 @@ public class Sudoku {
                     for (int c = bCol * 3; c < (bCol * 3) + 3; c++) {
                         int num = board[r][c];
                         if (hashmap.containsKey(num)) {
-                            errors.add("Box " +
-                                    boxCount +
-                                    ", Row " +
-                                    r +
-                                    ", Column " +
-                                    c +
-                                    " contains duplicate value: " +
-                                    num);
+                            errors.add("Box "
+                                    + boxCount
+                                    + ", Row "
+                                    + r
+                                    + ", Column "
+                                    + c
+                                    + " contains duplicate value: "
+                                    + num);
                         }
                         hashmap.put(num, hashmap.getOrDefault(num, 0) + 1);
                     }
