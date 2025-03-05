@@ -42,14 +42,12 @@ public class SudokuTest {
 
         Sudoku sudoku = new Sudoku(sudokuBoard);
         List<String> errors = sudoku.getErrors();
+        List<String> expectedErrors = List.of("Row 4, Column, 5 contains duplicate value: 5",
+                "Row 4, Column 5 contains duplicate value: 5",
+                "Box 5, Row 4, Column 5 contains duplicate value: 5");
 
         assertFalse(errors.isEmpty());
-        assertEquals("Row 4, Column, 5 contains duplicate value: 5",
-                "Row 4, Column, 5 contains duplicate value: 5");
-        assertEquals("Row 4, Column 5 contains duplicate value: 5",
-                "Row 4, Column 5 contains duplicate value: 5");
-        assertEquals("Box 5, Row 4, Column 5 contains duplicate value: 5",
-                "Box 5, Row 4, Column 5 contains duplicate value: 5");
+        assertEquals(errors, expectedErrors);
 
 
 
