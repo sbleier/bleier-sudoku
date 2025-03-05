@@ -44,10 +44,11 @@ public class SudokuTest {
         List<String> errors = sudoku.getErrors();
 
         assertFalse(errors.isEmpty());
+        assertTrue(errors.contains("Row 4, Column, 5 contains duplicate value: 5"));
+        assertTrue(errors.contains("Row 4, Column 5 contains duplicate value: 5"));
+        assertTrue(errors.contains("Box 5, Row 4, Column 5 contains duplicate value: 5"));
 
-        for (String error : errors) {
-            System.out.println(error);
-        }
+
 
     }
 
