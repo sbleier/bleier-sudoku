@@ -7,7 +7,7 @@ import java.util.List;
 public class Sudoku {
     int[][] board;
 
-    Sudoku(int[][] board) {
+    public Sudoku(int[][] board) {
         this.board = board;
     }
 
@@ -47,15 +47,19 @@ public class Sudoku {
 
     public void checkBoxes(List<String> errors) {
         int boxCount = 1;
-        for(int bRow = 0; bRow < 3; bRow++) {
-            for(int bCol = 0; bCol < 3; bCol++) {
+        for (int bRow = 0; bRow < 3; bRow++) {
+            for (int bCol = 0; bCol < 3; bCol++) {
                 HashMap<Integer, Integer>  hashmap = new HashMap<>();
-                for (int r = bRow * 3; r < r+3; r++) {
-                    for (int c = bCol * 3; c < c+3; c++) {
+                for (int r = bRow * 3; r < (bRow * 3) + 3; r++) {
+                    for (int c = bCol * 3; c < (bCol * 3) + 3; c++) {
                         int num = board[r][c];
                         if (hashmap.containsKey(num)) {
-                            errors.add("Box " + boxCount + ", Row " + r + ", Column " + c + " contains duplicate value: " + num);
+                            errors.add("Box " + boxCount +
+                                    ", Row " + r +
+                                    ", Column " + c +
+                                    " contains duplicate value: " + num);
                         }
+                        hashmap.put(num, hashmap.getOrDefault(num, 0) + 1);
                     }
                 }
                 boxCount++;
