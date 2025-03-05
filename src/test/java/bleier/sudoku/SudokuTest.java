@@ -27,7 +27,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void Errors() {
+    public void yesErrors() {
         int[][] sudokuBoard = {
                 {5, 3, 4, 6, 7, 8, 9, 1, 2},
                 {6, 7, 2, 1, 9, 5, 3, 4, 8},
@@ -45,7 +45,7 @@ public class SudokuTest {
 
         assertFalse(errors.isEmpty());
 
-        for(String error : errors) {
+        for (String error : errors) {
             System.out.println(error);
         }
 
