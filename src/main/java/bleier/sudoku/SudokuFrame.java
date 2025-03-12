@@ -86,7 +86,7 @@ public class SudokuFrame extends JFrame {
         }
 
         for (SudokuError error : errors) {
-            cells[error.getRow()][error.getColumn()].setBackground(Color.RED);
+            cells[error.row()][error.col()].setBackground(Color.RED);
         }
     }
 
