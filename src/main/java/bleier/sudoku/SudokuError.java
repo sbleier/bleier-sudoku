@@ -20,6 +20,14 @@ public class SudokuError {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        SudokuError that = (SudokuError) obj;
+        return row == that.row && column == that.column && value == that.value;
+    }
+
+    @Override
     public String toString() {
         return "Row " + row + ", Column " + column + ", Value " + value + ": is a duplicate.";
     }
