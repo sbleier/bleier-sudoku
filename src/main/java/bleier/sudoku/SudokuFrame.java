@@ -50,7 +50,6 @@ public class SudokuFrame extends JFrame {
                     }
 
                     private void updateBoard(int i, int j) {
-                        try {
                             if (!cells[i][j].getText().isEmpty()) {
                                 sudoku.setBoard(i, j, Integer.parseInt(cells[i][j].getText()));
                             }
@@ -58,9 +57,6 @@ public class SudokuFrame extends JFrame {
                             if (fullBoard()) {
                                 highlightErrors();
                             }
-                        } catch (NumberFormatException e) {
-
-                        }
                     }
                 });
 
