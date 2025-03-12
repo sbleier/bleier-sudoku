@@ -1,8 +1,6 @@
 package bleier.sudoku;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Sudoku {
     int[][] board;
@@ -20,50 +18,50 @@ public class Sudoku {
     }
 
     public List<SudokuError> getErrors() {
-        List<SudokuError> errors = new ArrayList<>();
+        Set<SudokuError> errors = new HashSet<>();
         checkColumns(errors);
         checkRows(errors);
         checkBoxes(errors);
-        return errors;
+        return errors.stream().toList();
     }
 
-    public void checkRows(List<SudokuError> errors) {
+    public void checkRows(Set<SudokuError> errors) {
         for (int r = 0; r < 9; r++) {
-            HashMap<Integer, Integer>  hashmap = new HashMap<>();
+            Set<Integer> hashmap = new HashSet<>();
             for (int c = 0; c < 9; c++) {
                 int num = board[r][c];
-                if (hashmap.containsKey(num)) {
+                if (hashmap.contains(num)) {
                     errors.add(new SudokuError(r, c, num));
                 }
-                hashmap.put(num, hashmap.getOrDefault(num, 0) + 1);
+                hashmap.add(num);
             }
         }
     }
 
-    public void checkColumns(List<SudokuError> errors) {
+    public void checkColumns(Set<SudokuError> errors) {
         for (int c = 0; c < 9; c++) {
-            HashMap<Integer, Integer>  hashmap = new HashMap<>();
+            Set<Integer> hashmap = new HashSet<>();
             for (int r = 0; r < 9; r++) {
                 int num = board[r][c];
-                if (hashmap.containsKey(num)) {
+                if (hashmap.contains(num)) {
                     errors.add(new SudokuError(r, c, num));
                 }
-                hashmap.put(num, hashmap.getOrDefault(num, 0) + 1);
+                hashmap.add(num);
             }
         }
     }
 
-    public void checkBoxes(List<SudokuError> errors) {
+    public void checkBoxes(Set<SudokuError> errors) {
         for (int bRow = 0; bRow < 3; bRow++) {
             for (int bCol = 0; bCol < 3; bCol++) {
-                HashMap<Integer, Integer>  hashmap = new HashMap<>();
+                Set<Integer> hashmap = new HashSet<>();
                 for (int r = bRow * 3; r < (bRow * 3) + 3; r++) {
                     for (int c = bCol * 3; c < (bCol * 3) + 3; c++) {
                         int num = board[r][c];
-                        if (hashmap.containsKey(num)) {
+                        if (hashmap.contains(num)) {
                             errors.add(new SudokuError(r, c, num));
                         }
-                        hashmap.put(num, hashmap.getOrDefault(num, 0) + 1);
+                        hashmap.add(num);
                     }
                 }
             }

@@ -24,7 +24,6 @@ public class SudokuTest {
 
         Sudoku sudoku = new Sudoku(sudokuBoard);
         List<SudokuError> errors = sudoku.getErrors();
-
         assertTrue(errors.isEmpty());
     }
 
@@ -44,9 +43,7 @@ public class SudokuTest {
 
         Sudoku sudoku = new Sudoku(sudokuBoard);
         List<SudokuError> errors = sudoku.getErrors();
-        List<SudokuError> expectedErrors = List.of(new SudokuError(4, 5, 5),
-                new SudokuError(4, 5, 5),
-                new SudokuError(4, 5, 5));
+        List<SudokuError> expectedErrors = List.of(new SudokuError(4, 5, 5));
 
         assertFalse(errors.isEmpty());
         assertEquals(errors, expectedErrors);
