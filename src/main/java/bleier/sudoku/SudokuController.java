@@ -47,13 +47,11 @@ public class SudokuController {
                             if (fullBoard()) {
                                 highlightErrors(model.getErrors());
                             }
-                        }
-                        catch (NumberFormatException e) {
+                        } catch (NumberFormatException e) {
                             cells[i][j].setText("0");
                         }
                     }
                 });
-
             }
         }
     }
