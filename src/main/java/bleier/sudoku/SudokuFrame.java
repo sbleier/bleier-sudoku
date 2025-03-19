@@ -71,9 +71,6 @@ public class SudokuFrame extends JFrame {
 
     }
 
-    public JTextField getCell(int row, int col) {
-        return cells[row][col];
-    }
 
     //commented out code bc now in controller
     /*private boolean fullBoard() {
@@ -86,7 +83,7 @@ public class SudokuFrame extends JFrame {
         }
         return true;
     }
-     */
+     *
 
     public void highlightErrors(List<SudokuError> errors) {
         for (int i = 0; i < 9; i++) {
@@ -99,6 +96,8 @@ public class SudokuFrame extends JFrame {
             cells[error.row()][error.col()].setBackground(Color.RED);
         }
     }
+    /*
+     */
 
     public static void main(String[] args) {
         int[][] board = {
@@ -114,7 +113,7 @@ public class SudokuFrame extends JFrame {
         };
         Sudoku sudoku = new Sudoku(board);
         SudokuFrame frame = new SudokuFrame(sudoku);
-        SudokuController controller = new SudokuController(sudoku, frame);
+        SudokuController controller = new SudokuController(sudoku, frame.cells);
         frame.setVisible(true);
     }
 }

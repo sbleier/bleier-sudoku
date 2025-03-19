@@ -3,15 +3,17 @@ package bleier.sudoku;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.util.List;
 
 public class SudokuController {
 
     private Sudoku model;
-    private SudokuFrame view;
+    private JTextField[][] cells;
 
-    public SudokuController(Sudoku model, SudokuFrame view) {
+    public SudokuController(Sudoku model, JTextField[][] cells) {
         this.model = model;
-        this.view = view;
+        this.cells = cells;
         addListeners();
     }
 
@@ -20,7 +22,7 @@ public class SudokuController {
             for (int j = 0; j < 9; j++) {
                 final int row = i;
                 final int col = j;
-                view.getCell(i, j).getDocument().addDocumentListener(new DocumentListener() {
+                cells[i][j].getDocument().addDocumentListener(new DocumentListener() {
                     @Override
                     public void insertUpdate(DocumentEvent e) {
                         updateBoard(row, col);
@@ -38,16 +40,16 @@ public class SudokuController {
 
                     private void updateBoard(int i, int j) {
                         try {
-                            if (!view.getCell(i, j).getText().isEmpty()) {
-                                model.setBoard(i, j, Integer.parseInt(view.getCell(i, j).getText()));
+                            if (cells[i][j].getText().isEmpty()) {
+                                model.setBoard(i, j, Integer.parseInt(cells[i][j].getText()));
                             }
 
                             if (fullBoard()) {
-                                view.highlightErrors(model.getErrors());
+                                highlightErrors(model.getErrors());
                             }
                         }
                         catch (NumberFormatException e) {
-                            view.getCell(i, j).setText("0");
+                            cells[i][j].setText("0");
                         }
                     }
                 });
@@ -59,11 +61,23 @@ public class SudokuController {
     private boolean fullBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (Integer.parseInt(view.getCell(i, j).getText().trim()) == 0) {
+                if (Integer.parseInt(cells[i][j].getText().trim()) == 0) {
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    public void highlightErrors(List<SudokuError> errors) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                cells[i][j].setBackground(Color.WHITE);
+            }
+        }
+
+        for (SudokuError error : errors) {
+            cells[error.row()][error.col()].setBackground(Color.RED);
+        }
     }
 }
