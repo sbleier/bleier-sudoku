@@ -26,7 +26,8 @@ public class SudokuFrame extends JFrame {
             }
         }
 
-        for (int i = 0; i < 9; i++) {
+        //commented out code bc now in controller
+        /*for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 final int row = i;
                 final int col = j;
@@ -66,11 +67,13 @@ public class SudokuFrame extends JFrame {
                 });
 
             }
-        }
+        } */
 
     }
 
-    private boolean fullBoard() {
+
+    //commented out code bc now in controller
+    /*private boolean fullBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (Integer.parseInt(cells[i][j].getText().trim()) == 0) {
@@ -80,10 +83,9 @@ public class SudokuFrame extends JFrame {
         }
         return true;
     }
+     *
 
-    private void highlightErrors() {
-        List<SudokuError> errors = sudoku.getErrors();
-
+    public void highlightErrors(List<SudokuError> errors) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 cells[i][j].setBackground(Color.WHITE);
@@ -94,6 +96,8 @@ public class SudokuFrame extends JFrame {
             cells[error.row()][error.col()].setBackground(Color.RED);
         }
     }
+    /*
+     */
 
     public static void main(String[] args) {
         int[][] board = {
@@ -109,6 +113,7 @@ public class SudokuFrame extends JFrame {
         };
         Sudoku sudoku = new Sudoku(board);
         SudokuFrame frame = new SudokuFrame(sudoku);
+        SudokuController controller = new SudokuController(sudoku, frame.cells);
         frame.setVisible(true);
     }
 }
