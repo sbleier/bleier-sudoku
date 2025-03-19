@@ -12,9 +12,10 @@ public class SudokuController {
     public SudokuController(Sudoku model, SudokuFrame view) {
         this.model = model;
         this.view = view;
+        addListeners();
     }
 
-    private void addListeners(){
+    private void addListeners() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 final int row = i;
@@ -23,19 +24,16 @@ public class SudokuController {
                     @Override
                     public void insertUpdate(DocumentEvent e) {
                         updateBoard(row, col);
-
                     }
 
                     @Override
                     public void removeUpdate(DocumentEvent e) {
                         updateBoard(row, col);
-
                     }
 
                     @Override
                     public void changedUpdate(DocumentEvent e) {
                         updateBoard(row, col);
-
                     }
 
                     private void updateBoard(int i, int j) {
