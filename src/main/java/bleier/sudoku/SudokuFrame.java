@@ -50,12 +50,17 @@ public class SudokuFrame extends JFrame {
                     }
 
                     private void updateBoard(int i, int j) {
-                            if (!cells[i][j].getText().isEmpty()) {
-                                sudoku.setBoard(i, j, Integer.parseInt(cells[i][j].getText()));
-                            }
+                            try {
+                                if (!cells[i][j].getText().isEmpty()) {
+                                    sudoku.setBoard(i, j, Integer.parseInt(cells[i][j].getText()));
+                                }
 
-                            if (fullBoard()) {
-                                highlightErrors();
+                                if (fullBoard()) {
+                                    highlightErrors();
+                                }
+                            }
+                            catch (NumberFormatException e) {
+                                cells[i][j].setText("0");
                             }
                     }
                 });
@@ -68,7 +73,7 @@ public class SudokuFrame extends JFrame {
     private boolean fullBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (Integer.parseInt(cells[i][j].getText()) == 0) {
+                if (Integer.parseInt(cells[i][j].getText().trim()) == 0) {
                     return false;
                 }
             }
@@ -86,7 +91,7 @@ public class SudokuFrame extends JFrame {
         }
 
         for (SudokuError error : errors) {
-            cells[error.getRow()][error.getColumn()].setBackground(Color.RED);
+            cells[error.row()][error.col()].setBackground(Color.RED);
         }
     }
 
